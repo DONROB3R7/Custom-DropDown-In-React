@@ -100,3 +100,7 @@ ul li {
 ul li:hover {
   background-color: #f2f2f2;
 }
+
+.main-wrapper div {
+  margin-bottom: 150px;
+}

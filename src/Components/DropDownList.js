@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class DropDownList extends Component {
+class ButtonOutcome extends Component {
   state = {
     isOpen: false,
     ListOfOptions: ["Won", "Lost", "Void"],
@@ -83,15 +83,29 @@ class DropDownList extends Component {
     const pick = this.state.chooseSelection;
     const isOpen = this.state.isOpen;
     return (
-      <div
-        ref={node => (this.node = node)}
-        className={
-          isOpen ? this.checkIsOpen() : `off body ${pick.toLowerCase()}`
-        }
-        onClick={this.toggleDropDown}
-      >
-        <span>{pick}</span>
-        {this.rendeDropDown(items)}
+      <div>
+        <div
+          ref={node => (this.node = node)}
+          className={
+            isOpen ? this.checkIsOpen() : `off body ${pick.toLowerCase()}`
+          }
+          onClick={this.toggleDropDown}
+        >
+          <span>{pick}</span>
+          {this.rendeDropDown(items)}
+        </div>
+      </div>
+    );
+  }
+}
+
+class DropDownList extends React.Component {
+  render() {
+    return (
+      <div className="main-wrapper">
+        <ButtonOutcome />
+        <ButtonOutcome />
+        <ButtonOutcome />
       </div>
     );
   }
