@@ -10,3 +10,23 @@ ul {
 ul {
   list-style: none;
 }
+
+div .off ul {
+  display: none;
+}
+
+div .on ul {
+  display: block;
+}
+
+.body {
+  width: 70px;
+  margin: 0 auto;
+}
+.body span {
+  cursor: pointer;
+}
+
+ul li {
+  cursor: pointer;
+}

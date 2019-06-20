@@ -23,7 +23,8 @@ class DropDownList extends Component {
 
   updateDropDown = item => {
     this.setState({
-      chooseSelection: item
+      chooseSelection: item,
+      isOpen: false
     });
   };
 
@@ -31,6 +32,28 @@ class DropDownList extends Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  };
+
+  handleClickOutside = () => {
+    this.setState({
+      isOpen: false
+    });
+  };
+
+  componentWillMount = () => {
+    document.addEventListener("click", this.handleClick, false);
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener("click", this.handleClick, false);
+  };
+
+  handleClick = e => {
+    if (this.node.contains(e.target)) {
+      return;
+    }
+
+    this.handleClickOutside();
   };
 
   checkIsOpen = () => "on body";
@@ -41,7 +64,10 @@ class DropDownList extends Component {
     const pick = this.state.chooseSelection;
     const isOpen = this.state.isOpen;
     return (
-      <div className={isOpen ? this.checkIsOpen() : "off body"}>
+      <div
+        ref={node => (this.node = node)}
+        className={isOpen ? this.checkIsOpen() : "off body"}
+      >
         <span onClick={this.toggleDropDown}>{pick}</span>
         {this.rendeDropDown(items)}
       </div>
