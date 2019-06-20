@@ -3,8 +3,9 @@ import React, { Component } from "react";
 class DropDownList extends Component {
   state = {
     isOpen: false,
-    ListOfOptions: ["Winner", "Lost", "Void"],
-    chooseSelection: "Winner"
+    ListOfOptions: ["Won", "Lost", "Void"],
+    chooseSelection: "Won",
+    userChange: false
   };
 
   rendeDropDown = items => {
@@ -12,7 +13,11 @@ class DropDownList extends Component {
       <ul>
         {items.map((item, key) => {
           return (
-            <li key={key} onClick={() => this.updateDropDown(item)}>
+            <li
+              className={item.toLowerCase()}
+              key={key}
+              onClick={() => this.updateDropDown(item)}
+            >
               {item}
             </li>
           );
@@ -24,7 +29,8 @@ class DropDownList extends Component {
   updateDropDown = item => {
     this.setState({
       chooseSelection: item,
-      isOpen: false
+      isOpen: false,
+      userChange: true
     });
   };
 
@@ -49,26 +55,42 @@ class DropDownList extends Component {
   };
 
   handleClick = e => {
-    if (this.node.contains(e.target)) {
-      return;
-    }
-
-    this.handleClickOutside();
+    if (this.node.contains(e.target)) return;
+    if (this.state.isOpen) this.handleClickOutside();
   };
 
   checkIsOpen = () => "on body";
 
   render() {
     console.log(this.state.isOpen);
-    const items = this.state.ListOfOptions;
+    let items = this.state.ListOfOptions;
+    if (this.state.userChange) {
+      const chooseSelection = this.state.chooseSelection;
+      switch (chooseSelection) {
+        case "Won":
+          items = ["Won", "Lost", "Void"];
+          break;
+        case "Lost":
+          items = ["Lost", "Won", "Void"];
+          break;
+        case "Void":
+          items = ["Void", "Won", "Lost"];
+          break;
+
+        default:
+      }
+    }
     const pick = this.state.chooseSelection;
     const isOpen = this.state.isOpen;
     return (
       <div
         ref={node => (this.node = node)}
-        className={isOpen ? this.checkIsOpen() : "off body"}
+        className={
+          isOpen ? this.checkIsOpen() : `off body ${pick.toLowerCase()}`
+        }
+        onClick={this.toggleDropDown}
       >
-        <span onClick={this.toggleDropDown}>{pick}</span>
+        <span>{pick}</span>
         {this.rendeDropDown(items)}
       </div>
     );

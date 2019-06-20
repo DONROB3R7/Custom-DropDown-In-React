@@ -2,6 +2,15 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+h1 {
+  color: #fff;
+}
+
+body {
+  background: #2e2e2e;
+}
+
 ul {
   padding: 0;
   margin: 0px;
@@ -11,22 +20,83 @@ ul {
   list-style: none;
 }
 
-div .off ul {
+div.off ul {
   display: none;
 }
 
-div .on ul {
+div.on ul {
   display: block;
 }
 
 .body {
-  width: 70px;
+  width: 113px;
   margin: 0 auto;
-}
-.body span {
+  background-color: #fff;
+  padding: 11px 0px;
   cursor: pointer;
+  position: relative;
+}
+
+.body.on {
+  padding: 0px;
+}
+
+.body.on span {
+  display: none;
+}
+
+.body span::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 5px 0 5px;
+  border-color: #000 transparent transparent transparent;
+  position: absolute;
+  top: 18px;
+  right: 12px;
+}
+
+.body span::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  background-image: url(https://uploads.codesandbox.io/uploads/user/ba19fa47-6b83-41c0-995c-57f110122338/oltu-won-cup.png);
+  background-repeat: no-repeat;
+  top: 12px;
+  left: 12px;
+}
+
+.body.lost span::before {
+  background-image: url(https://uploads.codesandbox.io/uploads/user/ba19fa47-6b83-41c0-995c-57f110122338/zd_j-icon-lost.png);
+  background-repeat: no-repeat;
+}
+
+.body.void span::before {
+  background-image: url(https://uploads.codesandbox.io/uploads/user/ba19fa47-6b83-41c0-995c-57f110122338/W_lp-icon-void.png);
+  background-repeat: no-repeat;
+}
+
+.body ul li {
+  background-image: url(https://uploads.codesandbox.io/uploads/user/ba19fa47-6b83-41c0-995c-57f110122338/W_lp-icon-void.png);
+  background-repeat: no-repeat;
+  background-position: 12px 12px;
+}
+
+.body ul li.won {
+  background-image: url(https://uploads.codesandbox.io/uploads/user/ba19fa47-6b83-41c0-995c-57f110122338/oltu-won-cup.png);
+}
+
+.body ul li.lost {
+  background-image: url(https://uploads.codesandbox.io/uploads/user/ba19fa47-6b83-41c0-995c-57f110122338/zd_j-icon-lost.png);
 }
 
 ul li {
   cursor: pointer;
+  padding: 11px 0px;
+}
+
+ul li:hover {
+  background-color: #f2f2f2;
 }
